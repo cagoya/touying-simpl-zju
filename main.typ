@@ -1,7 +1,7 @@
 #import "@preview/touying:0.6.1": *
 #import "@preview/cetz:0.4.2"
 #import "@preview/fletcher:0.5.8" as fletcher: edge, node
-#import "./lib.typ": *
+#import "./template/lib.typ": *
 
 #let cetz-canvas = touying-reducer.with(reduce: cetz.canvas, cover: cetz.draw.hide.with(bounds: true))
 #let fletcher-diagram = touying-reducer.with(reduce: fletcher.diagram, cover: fletcher.hide)
@@ -21,8 +21,6 @@
 )
 
 #title-slide()
-
-#title-slide-blue()
 
 #outline-slide()
 

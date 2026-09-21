@@ -348,82 +348,6 @@
   touying-slide(self: self, body)
 })
 
-/// Blue-banner variant of the title slide, with a full-width ZJU-blue block
-/// at the bottom holding the title information.
-#let title-slide-blue(
-  config: (:),
-  extra: none,
-  ..args,
-) = touying-slide-wrapper(self => {
-  self = utils.merge-dicts(self, config, config-common(freeze-slide-counter: true), config-page(margin: (
-    top: 3.5em,
-    bottom: 0em,
-    x: 0em,
-  )))
-  let info = self.info + args.named()
-  let body = {
-    set par(leading: 1.6em)
-    set align(left + bottom)
-    set page(background: {
-      place(top, rect(width: 100%, height: 45%, fill: gradient.linear(
-        angle: 90deg,
-        self.colors.neutral-lightest,
-        self.colors.primary.transparentize(92%),
-      )))
-      place(right + top, dx: 12%, dy: -18%, circle(radius: 11em, fill: self.colors.primary.transparentize(90%)))
-      place(left + top, dx: 4%, dy: 10%, image("assets/zju-emblem.png", height: 32%))
-    })
-    line(length: 100%, stroke: (paint: self.colors.neutral-light, thickness: 1.5pt))
-    v(-1.15em)
-    block(fill: self.colors.primary, width: 100%, {
-      block(
-        inset: (y: 1.6em, x: 3em),
-        text(
-          size: 1.8em,
-          fill: self.colors.neutral-light,
-          weight: "bold",
-          info.title,
-        )
-          + (
-            if info.subtitle != none {
-              linebreak()
-              text(
-                size: 1.2em,
-                fill: self.colors.neutral-light,
-                weight: "bold",
-                info.subtitle,
-              )
-            }
-          ),
-      )
-      grid(
-        columns: (65%, 35%),
-        block({
-          set text(size: 1.1em, fill: self.colors.neutral-light, weight: "semibold")
-          if info.author != none {
-            block(inset: (x: 2.8em), spacing: 0.8em, info.author)
-          }
-          if info.date != none {
-            block(inset: (x: 2.8em), spacing: 0.8em, utils.display-info-date(self))
-          }
-          set text(size: .8em)
-          if info.institution != none {
-            block(inset: (x: 3.4em), spacing: 0.8em, info.institution)
-          }
-          if extra != none {
-            block(inset: (x: 3.4em), spacing: 0.8em, extra)
-          }
-          v(0.5em)
-        }),
-        align(right + horizon, block(inset: (x: 2em), image("assets/zju-emblem-text-white.png", width: 90%))),
-      )
-      v(2em)
-    })
-  }
-  touying-slide(self: self, body)
-})
-
-
 /// Outline slide for the presentation.
 ///
 /// - config (dictionary): The configuration of the slide.
@@ -697,7 +621,7 @@
 #let zju-theme(
   aspect-ratio: "16-9",
   navigation: none,
-  font: ("Libertinus Serif", "Noto Serif CJK SC", "Songti SC", "STSong"),
+  font: "Heiti SC",
   sidebar: (
     width: 10em,
     filled: false,
