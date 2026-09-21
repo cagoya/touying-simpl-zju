@@ -140,6 +140,8 @@
   }
 }
 
+#let _zju-corner-logo = place(top + right, dx: -1.9em, image("assets/zju-logo.png", height: 1.6cm))
+
 #let zju-header(self) = {
   let last-heading-depth = _get-last-heading-depth(self.headings)
   let last-heading-label = _get-last-heading-label(self.headings)
@@ -187,7 +189,7 @@
             style: none,
           ))
         ],
-        align(right + horizon, image("assets/zju-emblem.png", height: 0.9cm)),
+        box(height: 0.9cm),
       ),
       align(center + top, line(length: 100%, stroke: (paint: self.colors.primary, thickness: 1.5pt))),
     )
@@ -205,7 +207,7 @@
             style: none,
           ))
         ],
-        align(right + horizon, image("assets/zju-emblem.png", height: 0.9cm)),
+        box(height: 0.9cm),
       ),
       align(center + horizon, line(length: 100%, stroke: (paint: self.colors.primary, thickness: 1.5pt))),
       v(1em),
@@ -264,7 +266,7 @@
 ) = touying-slide-wrapper(self => {
   let self = utils.merge-dicts(
     self,
-    config-page(header: zju-header, footer: zju-footer, margin: (x: 1.25cm)),
+    config-page(header: zju-header, foreground: _zju-corner-logo, footer: zju-footer, margin: (x: 1.25cm)),
     config-common(subslide-preamble: self.store.subslide-preamble),
   )
   touying-slide(self: self, config: config, repeat: repeat, setting: setting, composer: composer, ..bodies)
@@ -294,7 +296,7 @@
   ..args,
 ) = touying-slide-wrapper(self => {
   self = utils.merge-dicts(self, config, config-common(freeze-slide-counter: true), config-page(
-    header: align(right + horizon, block(inset: (right: 0.5em, top: 1.2em), image("assets/zju-logo.png", height: 1.6cm))),
+    header: none,
     margin: (top: 3.5em, bottom: 1.5em, x: 2em),
   ))
   let info = self.info + args.named()
@@ -502,7 +504,7 @@
       grid(
         columns: (1fr, 35%),
         align(left + horizon, text(size: 1.9em, utils.display-current-heading(depth: self.slide-level, style: auto))),
-        align(right + horizon, image("assets/zju-emblem.png", height: 1.5cm)),
+        box(height: 1.5cm),
       ),
       v(-2cm),
       align(center + horizon, line(length: 100%, stroke: (paint: self.colors.primary, thickness: 1.5pt))),
@@ -542,7 +544,7 @@
 })
 
 
-/// End slide with the ZJU logo on a light background.
+/// Centered end slide on a light background.
 #let end-slide(config: (:), body) = touying-slide-wrapper(self => {
   self = utils.merge-dicts(
     self,
@@ -551,35 +553,14 @@
       margin: 2em,
     ),
   )
-  set text(fill: self.colors.primary, size: 1.65em, weight: "bold")
+  set text(fill: self.colors.primary, size: 2.2em, weight: "bold")
   let body = {
     set page(background: _zju-title-background(self))
-    block(width: 90%, grid(
-      columns: (45%, 1fr),
-      column-gutter: 1em,
-      align(horizon, image("assets/zju-logo.png", width: 100%)), align(horizon + left, body),
-    ))
+    block(width: 90%, align(center, body))
   }
   touying-slide(self: self, config: config, align(horizon + center, body))
 })
 
-
-/// End slide on a full ZJU-blue background with the white logo.
-#let end-slide-blue(config: (:), body) = touying-slide-wrapper(self => {
-  self = utils.merge-dicts(self, config-common(freeze-slide-counter: true, new-section-slide-fn: none), config-page(
-    fill: self.colors.primary,
-    margin: 2em,
-  ))
-  set text(fill: self.colors.neutral-lightest, size: 1.75em, weight: "bold")
-  let body = {
-    v(1fr)
-    image("assets/zju-emblem-text-white.png", height: 30%)
-    v(0.5em)
-    body
-    v(1.25fr)
-  }
-  touying-slide(self: self, config: config, align(horizon + center, body))
-})
 
 /// Touying ZJU theme.
 ///
@@ -666,7 +647,7 @@
     } else if navigation == "mini-slides" {
       (top: if mini-slides.linebreaks { mini-slides.height } else { 6em }, bottom: 3em, x: mini-slides.x)
     } else {
-      (top: 5em, bottom: 2em, x: mini-slides.x)
+      (top: 6.5em, bottom: 2em, x: mini-slides.x)
     }),
     config-common(
       slide-fn: slide,

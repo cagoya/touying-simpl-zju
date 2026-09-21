@@ -16,7 +16,6 @@
     subtitle: [基于 Touying 的浙江大学 Typst 幻灯片模板],
     author: [求是学子],
     date: datetime.today(),
-    institution: [浙江大学],
   ),
 )
 
@@ -196,12 +195,6 @@ Touying 取自中文里的「投影」，在英文中意为 project。相较而�
 == 结束页 <touying:unoutlined>
 
 #end-slide[
-  感谢聆听
-
-  Thanks for Listening!
-]
-
-#end-slide-blue[
   感谢聆听
 
   Thanks for Listening!
