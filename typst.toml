@@ -1,0 +1,16 @@
+[package]
+name = "touying-simpl-zju"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["hao"]
+license = "MIT"
+description = "浙江大学 Touying 幻灯片主题 (Touying Slide Theme for ZJU)"
+keywords = ["touying", "presentation", "slide", "zju"]
+categories = ["presentation"]
+compiler = "0.13.1"
+exclude = ["/examples/", "/build/", "/.gitignore"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
